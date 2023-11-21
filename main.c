@@ -12,6 +12,8 @@ typedef struct Deck{
     card *next;
 } Deck;
 
+typedef enum choice{HIT,STAND,DOUBLE,SURREND}choice;
+
 int main() {
     printf("Hello, World!\n");
     return 0;
