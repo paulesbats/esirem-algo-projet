@@ -3,19 +3,19 @@
 
 typedef enum Color{SPADE, HEART, DIAMOND, CLOVER}Color;
 
-typedef struct card{ // structure pour chaque carte
+typedef struct Card{ // structure pour chaque carte
     int valeur;
     Color color;
-} card;
+} Card;
 
 //struct which can contain a undefined number of card
 typedef struct Deck{
-    card card;
-    card *next;
+    Card card;
+    Card *next;
 } Deck;
 
 
-typedef enum choice{HIT,STAND,DOUBLE,SURREND}choice;
+typedef enum Choice{HIT,STAND,DOUBLE,SURREND}Choice;
 
 //struct which contain a deck and a value
 typedef struct Player {
@@ -23,6 +23,8 @@ typedef struct Player {
     int value;
 } Player;
 
+void ShowHand(){
+};
 
 int main() {
     printf("Hello, World!\n");
