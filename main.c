@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-struct card{
+struct card{ // structure pour chaque carte
     int valeur;
     enum Color color;
 };
