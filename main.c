@@ -16,6 +16,12 @@ typedef struct Deck{
     card *next;
 } Deck;
 
+//struct which contain a deck and a value
+typedef struct Player {
+    Deck deck;
+    int value;
+} Player;
+
 int main() {
     printf("Hello, World!\n");
     return 0;
