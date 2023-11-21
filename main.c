@@ -1,14 +1,12 @@
 #include <stdio.h>
 
 
-enum Color{SPADE, HEART, DIAMOND, CLOVER};
-
+typedef enum Color{SPADE, HEART, DIAMOND, CLOVER}Color;
 
 typedef struct card{ // structure pour chaque carte
     int valeur;
-    enum Color color;
+    Color color;
 } card;
-
 
 //struct which can contain a undefined number of card
 typedef struct Deck{
@@ -30,4 +28,3 @@ int main() {
     printf("Hello, World!\n");
     return 0;
 }
-
