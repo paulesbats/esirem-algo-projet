@@ -1,9 +1,6 @@
 #include <stdio.h>
 
-enum Color{SPADE, HEART, DIAMOND, CLOVER}; //Énumération des couleurs
-
-
-
 int main() {
+    printf("Hello, World!\n");
     return 0;
 }
