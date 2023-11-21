@@ -1,5 +1,9 @@
 #include <stdio.h>
 
+
+enum Color{SPADE, HEART, DIAMOND, CLOVER};
+
+
 typedef struct card{ // structure pour chaque carte
     int valeur;
     enum Color color;
