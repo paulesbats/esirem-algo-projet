@@ -1,13 +1,13 @@
 #include <stdio.h>
 
-struct card{ // structure pour chaque carte
+typedef struct card{ // structure pour chaque carte
     int valeur;
     enum Color color;
-};
+} card;
 
-=======
+
 //struct which can contain a undefined number of card
-typedef struct{
+typedef struct Deck{
     card card;
     card *next;
 } Deck;
