@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-enum Color{SPADE, HEART, DIAMOND, CLOVER};
+enum Color{SPADE, HEART, DIAMOND, CLOVER}; //Énumération des couleurs
 
 
 
