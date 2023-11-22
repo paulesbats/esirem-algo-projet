@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+//Debut du projet
 
 typedef enum Color{SPADE, HEART, DIAMOND, CLOVER}Color;
 
