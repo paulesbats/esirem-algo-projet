@@ -1,7 +1,6 @@
 #include <stdio.h>
-#include <stdlib.h> 
 #include <time.h>
-
+#include <stdlib.h> 
 //Debut du projet
 
 typedef enum Color{SPADE, HEART, DIAMOND, CLOVER}Color;
@@ -15,6 +14,7 @@ typedef struct Card{ // structure pour chaque carte
 struct Deck{
     Card card;
     struct Deck *next;
+    struct Deck *prev;
 }Deck;
 
 typedef enum Choice{HIT,STAND,DOUBLE,SURREND}Choice;
@@ -26,10 +26,9 @@ typedef struct Player {
 } Player;
 
 //generate the deck
-struct Deck* generateDeck(){
-    struct Deck tab[52];
+void generateDeck(struct Deck *ptr){
+    Card tab[52];
     for(int i = 0; i < 52; i++) {
-        struct Deck tmpDeck;
         Card card;
         if(i % 4 == 0){
             card.color = SPADE;
@@ -43,23 +42,27 @@ struct Deck* generateDeck(){
         if(i % 4 == 3){
             card.color = CLOVER;
         }
-        card.valeur = i % 13;
-        tmpDeck.card = card;
-        tab[i] = tmpDeck;
+        card.valeur = i % 13 + 1;
+        tab[i] = card;
     }
 
     srand(time(NULL));
-    for(int i = 0; i < 1000; i++) {
+    for(int i = 0; i < 9000; i++) {
         int n = rand() % 50;
-        struct Deck tmp = tab[i];
-        tab[i] = tab[i+1];
-        tab[i+1] = tmp;
+        Card tmp = tab[n];
+        tab[n] = tab[n+1];
+        tab[n+1] = tmp;
     }
+    struct Deck *current = ptr;
+    current->prev = NULL;
     for(int i = 0; i<51; i++) {
-        tab[i].next = &tab[i+1];
+        struct Deck *tmp = malloc(sizeof(struct Deck));
+        current->card = tab[i];
+        current->next = tmp;
+        tmp->prev = current;
+        current = tmp;
     }
-    tab[52].next = NULL;
-    return &tab[0];
+    current->next = NULL;
 }
 
 void ShowHand(Player player){
@@ -88,7 +91,7 @@ void ShowHand(Player player){
 
 void init(Player* bank, Player* player1,struct Deck* deckP ){
      player1->value = 50;
-     deckP = generateDeck();
+     generateDeck(deckP);
 }
 
 
@@ -140,6 +143,13 @@ void MainGame(){
 }
 
 int main() {
+    /* test 
+    Player *player = malloc(sizeof(Player));
+    struct Deck *deck = malloc(sizeof(struct Deck));
+    generateDeck(deck);
+    player->deck = deck;
+    ShowHand(*player);
+    */
     return 0;
 
 
