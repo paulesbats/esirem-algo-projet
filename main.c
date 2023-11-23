@@ -175,13 +175,13 @@ void MainGame(){
 }
 
 int main() {
-   
+   /*
     Player *player = malloc(sizeof(Player));
     struct Deck *deck = malloc(sizeof(struct Deck));
     generateDeck(deck);
     player->deck = draw(deck);
     ShowHand(*player);
-   
+   */
     return 0;
 
 }
