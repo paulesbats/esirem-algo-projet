@@ -14,6 +14,7 @@ typedef struct Card{ // structure pour chaque carte
 struct Deck{
     Card card;
     struct Deck *next;
+    struct Deck *prev;
 }Deck;
 
 typedef enum Choice{HIT,STAND,DOUBLE,SURREND}Choice;
@@ -52,10 +53,12 @@ void generateDeck(struct Deck *ptr){
         tab[n+1] = tmp;
     }
     struct Deck *current = ptr;
+    current->prev = NULL;
     for(int i = 0; i<51; i++) {
         struct Deck *tmp = malloc(sizeof(struct Deck));
         current->card = tab[i];
         current->next = tmp;
+        tmp->prev = current;
         current = tmp;
     }
     current->next = NULL;
