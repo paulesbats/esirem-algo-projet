@@ -47,6 +47,7 @@ struct Deck* generateDeck(){
         tmpDeck.card = card;
         tab[i] = tmpDeck;
     }
+
     srand(time(NULL));
     for(int i = 0; i < 1000; i++) {
         int n = rand() % 50;
@@ -84,7 +85,6 @@ void ShowHand(Player player){
         current = current->next;
     }
 }
-
 
 void init(Player* bank, Player* player1,struct Deck* deckP ){
      player1->value = 50;
@@ -131,9 +131,19 @@ int HandValue(Player player){
     return sum;
 }
 
+void MainGame(){
+    Player player;
+    Player bank;
+    struct Deck deck;
+    init(&bank,&player,&deck);
+
+}
+
+int main() {
+    return 0;
+
 
 int main(){
     userInput();
-
 }
 
