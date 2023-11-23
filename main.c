@@ -167,10 +167,58 @@ int HandValue(Player player){
 }
 
 void MainGame(){
+    int choice;
+    int i = 0;
+    int mise = 0;
     Player player;
+    player.value = 100;
     Player bank;
-    struct Deck deck;
-    init(&bank,&player,&deck);
+    bank.value = 0;
+    struct Deck* deck;
+    init(&bank,&player,deck);
+
+    while(player.value >= 10){
+        printf(" Vous possedez %d jetons",player.value);
+        player.value =-10;
+        mise =+ 10;
+        printf("Nouveau tours ! \n");
+
+        bank.deck = draw(deck);
+        player.deck = draw(deck);
+
+        ShowHand(player);
+
+        while(i==0){
+            choice = userInput();
+
+            if(HandValue(player)<21){
+                switch(choice) {
+                    case HIT:
+                        player.deck = draw(deck);
+                        break;
+                    case STAND:
+                        i = 1;
+                        break;
+                    case DOUBLE :
+                        mise = mise + 10;
+                        player.deck = draw(deck);
+                        break;
+                    case SURREND:
+                        player.value = player.value + 5;
+                        i = 1;
+                        player.deck = malloc(sizeof(struct Deck));
+                        printf("Vous avez abandonnez et vous recuperez donc la moitier de votre mise");
+                        break;
+                }
+            }
+            else if(HandValue(player)>21){
+                printf("Busted");
+                i = 1;
+            }
+        }
+    }
+
+
 
 }
 
@@ -183,6 +231,5 @@ int main() {
     ShowHand(*player);
    */
     return 0;
-
 }
 
