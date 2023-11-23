@@ -91,14 +91,37 @@ void init(Player* bank, Player* player1,struct Deck* deckP ){
      deckP = generateDeck();
 }
 
-int userInput(){
+Choice userInput(){
+    int answer = 0;
+    int i = 0;
     printf("Quel action voulez vous faire ?\n");
     printf(" - Pour tirer une carte, rentrez 1\n");
     printf(" - Pour vous arreter, rentrez 2\n");
     printf(" - Pour doubler, rentrez 3\n");
-    printf(" - Pour abandonner, rentrez 4\n");
+    printf(" - Pour abandonner, rentrez 4");
+    while(i == 0){
+        scanf(" %c", &answer);
+        if (answer == '1') {
+            i = 1;
+            return (HIT);
+        } else if (answer == '2') {
+            i = 1;
+            return (STAND);
+        } else if (answer == '3') {
+            i = 1;
+            return (DOUBLE);
+        } else if (answer == '4') {
+            i = 1;
+            return (SURREND);
+        }
+        if (answer != 1 || answer != 2 || answer != 3 || answer != 4) {
+            printf("Le format de reponse n'est pas correcte, reessayer.");
+        }
+    }
 }
 
-int main() {
+
+int main(){
+    userInput();
     return 0;
 }
