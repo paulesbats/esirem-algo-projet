@@ -89,6 +89,38 @@ void ShowHand(Player player){
     }
 }
 
+struct Deck* draw(struct Deck* deck)
+{
+    srand(time(NULL));
+    int n = rand() % 52;
+    struct Deck *current = deck;
+    for(int i = 0; i < n; i++) {
+        current = current->next;
+    }
+    struct Deck *tmp = current;
+    if(current->next != NULL){
+        if (current->next->next != NULL)
+        {
+            current->next = tmp->next->next;
+        }  
+        else{
+            current->next = NULL;
+        }      
+    }
+    if(current->prev != NULL){
+        if(current->prev->prev != NULL){
+            current->prev = tmp->prev->prev;
+        }
+        else{
+            current->prev = NULL;
+        }
+    }
+    tmp->next = malloc(sizeof(struct Deck));
+    tmp->prev = malloc(sizeof(struct Deck));
+    return tmp;
+};
+
+
 void init(Player* bank, Player* player1,struct Deck* deckP ){
      player1->value = 50;
      generateDeck(deckP);
@@ -96,7 +128,7 @@ void init(Player* bank, Player* player1,struct Deck* deckP ){
 
 
 Choice userInput(){
-    int answer = 0;
+    char answer;
     int i = 0;
     printf("Quel action voulez vous faire ?\n");
     printf(" - Pour tirer une carte, rentrez 1\n");
@@ -191,7 +223,13 @@ void MainGame(){
 }
 
 int main() {
-
+   /*
+    Player *player = malloc(sizeof(Player));
+    struct Deck *deck = malloc(sizeof(struct Deck));
+    generateDeck(deck);
+    player->deck = draw(deck);
+    ShowHand(*player);
+   */
     return 0;
 }
 
