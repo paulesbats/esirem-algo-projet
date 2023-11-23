@@ -115,17 +115,12 @@ Choice userInput(){
             i = 1;
             return (SURREND);
         }
-        if (answer != 1 || answer != 2 || answer != 3 || answer != 4) {
+        if (answer != ( 1 || 2 || 3 || 4 )) {
             printf("Le format de reponse n'est pas correcte, reessayer.");
         }
     }
 }
-
-
-int main(){
-    userInput();
-
-int HandValue(Player player) {
+int HandValue(Player player){
     int sum = 0;
     struct Deck *current = player.deck;
     while (current != NULL) {
@@ -136,6 +131,9 @@ int HandValue(Player player) {
     return sum;
 }
 
-int main() {
-    return 0;
+
+int main(){
+    userInput();
+
 }
+
