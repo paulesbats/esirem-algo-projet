@@ -16,6 +16,7 @@ typedef struct Deck{
     struct Deck *next;
 }Deck;
 
+
 typedef enum Choice{HIT,STAND,DOUBLE,SURREND}Choice;
 
 //struct which contain a deck and a value
@@ -47,7 +48,11 @@ void ShowHand(Player player){
         }
         current = current->next;
     }
-};
+
+void init(Player* bank, Player* player1,Deck* deckP ){
+     player1->value = 50;
+     deckP = generateDeck();
+}
 
 int main() {
     return 0;
