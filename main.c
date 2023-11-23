@@ -69,16 +69,16 @@ void ShowHand(Player player){
         printf("%d de ", value);
         switch (color) {
             case (HEART):
-                printf("Coeur");
+                printf("Coeur\n");
                 break;
             case (SPADE):
-                printf("Pique");
+                printf("Pique\n");
                 break;
             case (DIAMOND):
-                printf("Carreau");
+                printf("Carreau\n");
                 break;
             case (CLOVER):
-                printf("Trèfle");
+                printf("Trèfle\n");
                 break;
         }
         current = current->next;
@@ -89,6 +89,17 @@ void ShowHand(Player player){
 void init(Player* bank, Player* player1,struct Deck* deckP ){
      player1->value = 50;
      deckP = generateDeck();
+}
+
+int HandValue(Player player) {
+    int sum = 0;
+    struct Deck *current = player.deck;
+    while (current != NULL) {
+        int value = current->card.valeur;
+        sum+= value;
+        current = current->next;
+    };
+    return sum;
 }
 
 int main() {
