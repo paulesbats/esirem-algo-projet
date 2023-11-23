@@ -114,7 +114,7 @@ Choice userInput(){
             i = 1;
             return (SURREND);
         }
-        if (answer != 1 || answer != 2 || answer != 3 || answer != 4) {
+        if (answer != ( 1 || 2 || 3 || 4 )) {
             printf("Le format de reponse n'est pas correcte, reessayer.");
         }
     }
