@@ -11,7 +11,7 @@ typedef struct Card{ // structure pour chaque carte
 //struct which can contain a undefined number of card
 typedef struct Deck{
     Card card;
-    Card *next;
+    struct Deck *next;
 } Deck;
 
 
@@ -22,6 +22,11 @@ typedef struct Player {
     Deck deck;
     int value;
 } Player;
+
+void init(Player* bank, Player* player1,Deck* deckP ){
+     player1->value = 50;
+     deckP = generateDeck();
+}
 
 void ShowHand(){
 };
