@@ -132,18 +132,46 @@ int HandValue(Player player){
 }
 
 void MainGame(){
+    int choice;
+    int i = 0;
+    int mise = 0;
     Player player;
+    player.value = 100;
     Player bank;
-    struct Deck deck;
-    init(&bank,&player,&deck);
+    bank.value = 0;
+    struct Deck* deck;
+    init(&bank,&player,deck);
+
+    while(player.value >= 10){
+        player.value =-10;
+        mise =+ 10;
+        printf("Nouveau tours ! \n");
+
+        bank.deck = draw(deck);
+        player.deck = draw(deck);
+
+        ShowHand(player);
+
+        while(HandValue(player)<21 && i==0){
+            choice = userInput();
+
+            switch(choice){
+                case HIT:player.deck = draw(deck);
+                case STAND: i = 1;
+                case DOUBLE : mise = mise + 10; player.deck = draw(deck);
+                case SURREND: i = 1; player.value = player.value + 5;
+            }
+        }
+    }
+
+
+    choice = userInput();
+
 
 }
 
 int main() {
+    MainGame();
     return 0;
-
-
-int main(){
-    userInput();
 }
 
