@@ -15,7 +15,7 @@ Fonction permettant de montrer la main d'un joueur au complet
           VAR INT value <- current.card.valeur
           VAR Color color <- current.card.color
   
-          AFFICHER value, " de "
+          APPEL AFFICHER (value, " de ")
           
           CAS color DE
               COEUR : APPEL AFFICHER ("Coeur")
@@ -58,7 +58,6 @@ DEBUT HandValue()
         sum <- sum + value
         current <- current.next
     FIN TANT QUE
-
     RETOURNER sum
 FIN
 ```
@@ -76,29 +75,77 @@ DEBUT userInput()
     APPEL AFFICHER (" - Pour doubler, rentrez 3")
     APEL AFFICHER (" - Pour abandonner, rentrez 4")
 
-    TANT QUE i == 0 FAIRE
-        SCANF(" %d", &answer)
+    TANT QUE i = 0 FAIRE
+        APPEL LIRE(" %d", &answer)
 
-        SI answer == 1 FAIRE
+        SI answer = 1 FAIRE
             i <- 1
             RETOURNER HIT
-        SINON SI answer == 2 FAIRE
+        SINON SI answer = 2 FAIRE
             i <- 1
             RETOURNER STAND
-        SINON SI answer == 3 FAIRE
+        SINON SI answer = 3 FAIRE
             i <- 1
             RETOURNER DOUBLE
-        SINON SI answer == 4 FAIRE
+        SINON SI answer = 4 FAIRE
             i <- 1
             RETOURNER SURREND
         FIN SI
 
-        SI answer NON ÉGAL À (1 OU 2 OU 3 OU 4) FAIRE
+        SI answer NON ÉGAL À 1 OU 2 OU 3 OU 4 FAIRE
             APPEL AFFICHER ("Le format de réponse n'est pas correct, réessayez.")
         FIN SI
     FIN TANT QUE
 FIN
 ```
+## Fonction generateDeck
+
+Fonction permettant de générer un jeu de carte mélangé
+```
+DEBUT generateDeck()
+    PARAM Deck ptr
+    VAR Card tab[52]
+
+    POUR i ALLANT DE 0 À 51 FAIRE
+        VAR Card card
+        SI i % 4 = 0 ALORS
+            card.color <- SPADE
+        SINON SI i % 4 = 1 ALORS
+            card.color <- HEART
+        SINON SI i % 4 = 2 ALORS
+            card.color <- DIAMOND
+        SINON
+            card.color <- CLOVER
+        FIN SI
+
+        card.valeur <- i % 13 + 1
+        tab[i] <- card
+    FIN POUR
+
+    APPEL srand(APPEL time(NULL))
+
+    POUR i ALLANT DE 0 À 9000 FAIRE
+        VAR ENTIER n <- rand() % 50
+        VAR Card tmp <- tab[n]
+        tab[n] <- tab[n + 1]
+        tab[n + 1] <- tmp
+    FIN POUR
+
+    VAR Deck current <- ptr
+    current.prev <- NULL
+
+    POUR i ALLANT DE 0 À 50 FAIRE
+        VAR Deck tmp <- APPEL malloc(APPEL sizeof(Deck))
+        current.card <- tab[i]
+        current.next <- tmp
+        tmp.prev <- current
+        current <- tmp
+    FIN POUR
+
+    current.next <- NULL
+FIN
+```
+
 
 *Projet réalisé en première année de cycle ingénieur à l'ESIREM.*
 
