@@ -26,7 +26,7 @@ typedef struct Player {
 } Player;
 
 //generate the deck
-struct Deck generateDeck(){
+struct Deck* generateDeck(){
     struct Deck tab[52];
     for(int i = 0; i < 52; i++) {
         struct Deck tmpDeck;
@@ -58,7 +58,7 @@ struct Deck generateDeck(){
         tab[i].next = &tab[i+1];
     }
     tab[52].next = NULL;
-    return tab[0];
+    return &tab[0];
 }
 
 void ShowHand(Player player) {
@@ -86,7 +86,7 @@ void ShowHand(Player player) {
 }
 
 
-void init(Player* bank, Player* player1,Deck* deckP ){
+void init(Player* bank, Player* player1,struct Deck* deckP ){
      player1->value = 50;
      deckP = generateDeck();
 }
