@@ -21,7 +21,7 @@ typedef enum Choice{HIT,STAND,DOUBLE,SURREND}Choice;
 
 //struct which contain a deck and a value
 typedef struct Player {
-    struct Deck deck;
+    struct Deck *deck;
     int value;
 } Player;
 
@@ -61,10 +61,9 @@ struct Deck generateDeck(){
     return tab[0];
 }
 
-
-void ShowHand(Player player){
-    Deck *current = player.deck;
-    while(current != NULL){
+void ShowHand(Player player) {
+    struct Deck *current = player.deck;
+    while (current != NULL) {
         int value = current->card.valeur;
         Color color = current->card.color;
         printf("%d de ", value);
@@ -84,6 +83,8 @@ void ShowHand(Player player){
         }
         current = current->next;
     }
+}
+
 
 void init(Player* bank, Player* player1,Deck* deckP ){
      player1->value = 50;
