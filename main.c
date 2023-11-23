@@ -91,6 +91,14 @@ void init(Player* bank, Player* player1,struct Deck* deckP ){
      deckP = generateDeck();
 }
 
+int userInput(){
+    printf("Quel action voulez vous faire ?\n");
+    printf(" - Pour tirer une carte, rentrez 1\n");
+    printf(" - Pour vous arreter, rentrez 2\n");
+    printf(" - Pour doubler, rentrez 3\n");
+    printf(" - Pour abandonner, rentrez 4\n");
+}
+
 int main() {
     return 0;
 }
