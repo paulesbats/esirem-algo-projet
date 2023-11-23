@@ -61,9 +61,9 @@ struct Deck generateDeck(){
     return tab[0];
 }
 
-void ShowHand(Player player) {
+void ShowHand(Player player){
     struct Deck *current = player.deck;
-    while (current != NULL) {
+    while(current != NULL){
         int value = current->card.valeur;
         Color color = current->card.color;
         printf("%d de ", value);
