@@ -1,5 +1,6 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdlib.h> 
+#include <time.h>
 
 //Debut du projet
 
@@ -11,19 +12,54 @@ typedef struct Card{ // structure pour chaque carte
 } Card;
 
 //struct which can contain a undefined number of card
-typedef struct Deck{
+struct Deck{
     Card card;
     struct Deck *next;
 }Deck;
-
 
 typedef enum Choice{HIT,STAND,DOUBLE,SURREND}Choice;
 
 //struct which contain a deck and a value
 typedef struct Player {
-    Deck *deck;
+    struct Deck deck;
     int value;
 } Player;
+
+//generate the deck
+struct Deck generateDeck(){
+    struct Deck tab[52];
+    for(int i = 0; i < 52; i++) {
+        struct Deck tmpDeck;
+        Card card;
+        if(i % 4 == 0){
+            card.color = SPADE;
+        }
+        if(i % 4 == 1){
+            card.color = HEART;
+        }
+        if(i % 4 == 2){
+            card.color = DIAMOND;
+        }
+        if(i % 4 == 3){
+            card.color = CLOVER;
+        }
+        card.valeur = i % 13;
+        tmpDeck.card = card;
+        tab[i] = tmpDeck;
+    }
+    srand(time(NULL));
+    for(int i = 0; i < 1000; i++) {
+        int n = rand() % 50;
+        struct Deck tmp = tab[i];
+        tab[i] = tab[i+1];
+        tab[i+1] = tmp;
+    }
+    for(int i = 0; i<51; i++) {
+        tab[i].next = &tab[i+1];
+    }
+    tab[52].next = NULL;
+    return tab[0];
+}
 
 
 void ShowHand(Player player){
