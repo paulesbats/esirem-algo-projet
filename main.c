@@ -120,12 +120,7 @@ Choice userInput(){
         }
     }
 }
-
-
-int main(){
-    userInput();
-
-int HandValue(Player player) {
+int HandValue(Player player){
     int sum = 0;
     struct Deck *current = player.deck;
     while (current != NULL) {
@@ -136,6 +131,9 @@ int HandValue(Player player) {
     return sum;
 }
 
-int main() {
-    return 0;
+
+int main(){
+    userInput();
+
 }
+
