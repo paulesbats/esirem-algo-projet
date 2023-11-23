@@ -1,7 +1,6 @@
 #include <stdio.h>
-#include <stdlib.h> 
 #include <time.h>
-
+#include <stdlib.h> 
 //Debut du projet
 
 typedef enum Color{SPADE, HEART, DIAMOND, CLOVER}Color;
@@ -26,10 +25,9 @@ typedef struct Player {
 } Player;
 
 //generate the deck
-struct Deck* generateDeck(){
-    struct Deck tab[52];
+void generateDeck(struct Deck *ptr){
+    Card tab[52];
     for(int i = 0; i < 52; i++) {
-        struct Deck tmpDeck;
         Card card;
         if(i % 4 == 0){
             card.color = SPADE;
@@ -43,22 +41,24 @@ struct Deck* generateDeck(){
         if(i % 4 == 3){
             card.color = CLOVER;
         }
-        card.valeur = i % 13;
-        tmpDeck.card = card;
-        tab[i] = tmpDeck;
+        card.valeur = i % 13 + 1;
+        tab[i] = card;
     }
     srand(time(NULL));
-    for(int i = 0; i < 1000; i++) {
+    for(int i = 0; i < 9000; i++) {
         int n = rand() % 50;
-        struct Deck tmp = tab[i];
-        tab[i] = tab[i+1];
-        tab[i+1] = tmp;
+        Card tmp = tab[n];
+        tab[n] = tab[n+1];
+        tab[n+1] = tmp;
     }
+    struct Deck *current = ptr;
     for(int i = 0; i<51; i++) {
-        tab[i].next = &tab[i+1];
+        struct Deck *tmp = malloc(sizeof(struct Deck));
+        current->card = tab[i];
+        current->next = tmp;
+        current = tmp;
     }
-    tab[52].next = NULL;
-    return &tab[0];
+    current->next = NULL;
 }
 
 void ShowHand(Player player) {
@@ -69,16 +69,16 @@ void ShowHand(Player player) {
         printf("%d de ", value);
         switch (color) {
             case (HEART):
-                printf("Coeur");
+                printf("Coeur\n");
                 break;
             case (SPADE):
-                printf("Pique");
+                printf("Pique\n");
                 break;
             case (DIAMOND):
-                printf("Carreau");
+                printf("Carreau\n");
                 break;
             case (CLOVER):
-                printf("Trèfle");
+                printf("Trèfle\n");
                 break;
         }
         current = current->next;
@@ -88,9 +88,16 @@ void ShowHand(Player player) {
 
 void init(Player* bank, Player* player1,struct Deck* deckP ){
      player1->value = 50;
-     deckP = generateDeck();
+     generateDeck(deckP);
 }
 
 int main() {
+    /* test 
+    Player *player = malloc(sizeof(Player));
+    struct Deck *deck = malloc(sizeof(struct Deck));
+    generateDeck(deck);
+    player->deck = deck;
+    ShowHand(*player);
+    */
     return 0;
 }
