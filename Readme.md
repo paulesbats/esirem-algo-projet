@@ -66,4 +66,4 @@ FIN
 
 *Projet réalisé en première année de cycle ingénieur à l'ESIREM.*
 
-<img src="/interface/logo_esirem.png" alt="Logo de l'ESIREM" width=200 height=75>
+<img src="/logo-couleur.jpg" alt="Logo de l'ESIREM" width=200 height=75>
